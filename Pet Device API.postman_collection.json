@@ -1,0 +1,156 @@
+{
+	"info": {
+		"_postman_id": "8c38b3b1-8b42-4095-9f5d-fceac3b3ece6",
+		"name": "Pet Device API",
+		"description": "Collection for Pet Device API endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17944493"
+	},
+	"item": [
+		{
+			"name": "Add User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"user@example.com\",\n  \"name\": \"John Doe\",\n  \"role\": \"USER\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/dev/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"dev",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Pet",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Buddy\",\n  \"species\": \"Dog\",\n  \"breed\": \"Golden Retriever\",\n  \"age\": 5,\n  \"ownerId\": 1,\n  \"deviceId\": 1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/dev/pet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"dev",
+						"pet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Device",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"type\": \"COLLAR\",\n  \"status\": \"active\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/dev/device",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"dev",
+						"device"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Pet Data",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/dev/device/data/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"dev",
+						"device",
+						"data",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Pet Device Data",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"latitude\": 37.7749,\n  \"longitude\": -122.4194,\n  \"accuracy\": 5,\n  \"stepsCount\": 1200,\n  \"activeMinutes\": 60,\n  \"intensityLevel\": 3,\n  \"sleepPattern\": \"normal\",\n  \"feedingHabits\": \"regular\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/dev/pet/{petId}/device-data",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"dev",
+						"pet",
+						"{petId}",
+						"device-data"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,81 @@
+org: devuser25
+app: pet-wearable
+service: pet-wearable
+useDotenv: true
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: "eu-west-2"
+  stage: dev
+  profile: production
+  environment:
+    NODE_PATH: "/opt/nodejs/node_modules"
+    REGION: "eu-west-2"
+    PRISMA_CLIENT: "/opt/nodejs/node_modules/@prisma/client/index.js"
+    DATABASE_URL: ${env:DATABASE_URL}
+
+# plugins:
+#   - serverless-offline
+
+resources:
+  Resources:
+    GatewayResponseDefault4XX:
+      Type: "AWS::ApiGateway::GatewayResponse"
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Methods: "'*'"
+        ResponseType: DEFAULT_4XX
+        RestApiId:
+          Ref: "ApiGatewayRestApi"
+
+# package:
+#   patterns:
+#     - '!./node_modules/**'
+#     - '!./prisma/**'
+
+functions:
+  addUser:
+    handler: src/handlers/user/addUser.addUser
+    events:
+      - http:
+          path: /user
+          method: post
+          cors: true
+
+
+  addPet:
+    handler: src/handlers/pet/addPet.addPet
+    events:
+      - http:
+          path: /pet
+          method: post
+          cors: true
+
+  addDevice:
+    handler: src/handlers/device/addDevice.addDevice
+    events:
+      - http:
+          path: /device
+          method: post
+          cors: true
+
+  addPetDeviceData:
+    handler: src/handlers/pet/addPetDeviceData.addPetDeviceData
+    timeout: 20
+    events:
+      - http:
+          path: /pet/{petId}/device-data/{deviceId}
+          method: post
+          cors: true
+
+  getDeviceData:
+    handler: src/handlers/pet/getPetData.getPetData
+    events:
+      - http:
+          path: /pet/{petId}/device-data
+          method: get
+          cors: true
